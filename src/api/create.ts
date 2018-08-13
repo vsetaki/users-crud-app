@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_NAME } from '../constants';
-import { getLocalStorageItem } from 'utils';
+import { getLocalStorageItem, setLocalStorageItem } from 'utils';
 import { append } from 'ramda';
 
 function create(data: UserData) {
@@ -8,7 +8,7 @@ function create(data: UserData) {
   const nextId = lastItem && lastItem.id + 1 || 1;
   const newState = append({ id: nextId, ...data }, users || []);
 
-  localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(newState));
+  setLocalStorageItem<Users>(LOCAL_STORAGE_NAME, newState);
 
   return Promise.resolve(newState);
 }

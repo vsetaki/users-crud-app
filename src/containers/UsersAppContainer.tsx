@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDemoData } from 'api';
+import { getDemoData, deleteUser } from 'api';
 import read from 'api/read';
 import UserForm from 'components/UserFrom';
 import UsersTable from 'components/UsersTable';
@@ -8,7 +8,7 @@ interface State {
   users: Users;
   fetching: boolean;
   error?: string;
-  editingUser?: number;
+  editingUser?: User;
 }
 
 class UsersAppContainer extends React.Component<{}, State> {
@@ -22,11 +22,12 @@ class UsersAppContainer extends React.Component<{}, State> {
 
     this.loadData = this.loadData.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+    this.handleSubmitForm = this.handleSubmitForm.bind(this);
 
   }
 
   componentDidMount() {
-    // this.loadDemoData();
     this.loadData();
   }
 
@@ -47,23 +48,43 @@ class UsersAppContainer extends React.Component<{}, State> {
     read().then(data => this.setState({ fetching: false, users: data }));
   }
 
-  editUser(id: number) {
-    this.setState({ editingUser: id });
+  /**
+   * Устанавливает пользователя на редактирование
+   */
+  editUser(data: User) {
+    this.setState({ editingUser: data });
+  }
+
+  /**
+   * Удаляет пользователя по id
+   */
+  deleteUser(id: number) {
+    deleteUser(id);
+    this.loadData();
+  }
+
+  /**
+   * Обновляем данные из хранилища на сабмит формы
+   */
+  handleSubmitForm() {
+    this.setState({ fetching: true, editingUser: undefined });
+    this.loadData();
   }
 
   render() {
     const { users, fetching, editingUser } = this.state;
     return (
-      <div className="App">
+      <div className="user-crud-app">
         <h1>CRUD App</h1>
         <UserForm
           editingUser={editingUser}
-          onSubmit={this.loadData}
+          onSubmit={this.handleSubmitForm}
         />
         <UsersTable
           data={users}
           loading={fetching}
           editItem={this.editUser}
+          deleteItem={this.deleteUser}
         />
       </div>
     );

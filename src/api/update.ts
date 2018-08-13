@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_NAME } from '../constants';
-import { getLocalStorageItem } from 'utils';
+import { getLocalStorageItem, setLocalStorageItem } from 'utils';
 import { update as updateArray } from 'ramda';
 
 function update(id: number, data: UserData) {
@@ -12,7 +12,7 @@ function update(id: number, data: UserData) {
     newState = updateArray(userIndex, { id, ...data }, users);
   }
 
-  localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(newState));
+  setLocalStorageItem<Users>(LOCAL_STORAGE_NAME, newState);
 
   return Promise.resolve(newState);
 }

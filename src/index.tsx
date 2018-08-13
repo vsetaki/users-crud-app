@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import './index.css';
 import 'resources/main.less';
+import './index.css';
 import UsersAppContainer from 'containers/UsersAppContainer';
 
 ReactDOM.render(

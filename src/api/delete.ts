@@ -8,7 +8,7 @@ function deleteUser(id: number) {
 
   if (users && Array.isArray(users)) {
     const userIndex = users.findIndex((item) => item.id === id);
-    newState = remove(userIndex, 0, users);
+    newState = remove(userIndex, 1, users);
   }
 
   localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(newState));

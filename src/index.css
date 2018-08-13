@@ -3,3 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.user-crud-app {
+  min-width: 1000px;
+  padding: 20px;
+}
+
+.user-edit-form {
+  margin-bottom: 30px;
+}
+
+.user-edit-form-submit {
+  margin-right: 20px;
+}
