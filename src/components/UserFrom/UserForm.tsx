@@ -95,12 +95,6 @@ class UserForm extends React.Component<Props, {}> {
     this.props.onSubmit();
   }
 
-  renderOptions(options: number[]) {
-    return options.map((item) => (
-      <Option value={item} key={item}>{item}</Option>
-    ));
-  }
-
   renderDaysOptions() {
     const values = this.props.form.getFieldsValue() as UserFormData;
     return getMonthDays(values.birthdateMonth, values.birthdateYear).map((item) => (

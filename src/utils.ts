@@ -13,7 +13,7 @@ export function setLocalStorageItem<T>(name: string, value: T): void {
   localStorage.setItem(name, JSON.stringify(value));
 }
 
-export function isLeapYear(year: number) {
+export function isLeapYear(year: number): boolean {
   return new Date(year, 1, 29).getDate() === 29;
 }
 

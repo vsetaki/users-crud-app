@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getDemoData, deleteUser } from 'api';
+import { deleteUser } from 'api';
 import read from 'api/read';
 import UserForm from 'components/UserFrom';
 import UsersTable from 'components/UsersTable';
@@ -29,16 +29,6 @@ class UsersAppContainer extends React.Component<{}, State> {
 
   componentDidMount() {
     this.loadData();
-  }
-
-  /**
-   * Загружает демо юзеров
-   */
-  loadDemoData() {
-    this.setState({ fetching: true });
-    getDemoData()
-      .then(data => setTimeout(() => this.setState({ users: data, fetching: false }), 1500))
-      .catch(error => this.setState({ fetching: false, error }));
   }
 
   /**
